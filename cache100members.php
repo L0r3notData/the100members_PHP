@@ -1,12 +1,21 @@
 <?php
 
 
-$siteRoot = $_SERVER['DOCUMENT_ROOT'];
+// ##########################################
+// ###                                    ###
+// ###  GROUP MEMBERS FROM THE100.IO API  ###
+// ###  v1.4                              ###
+// ###  @L0r3notData                      ###
+// ###                                    ###
+// ##########################################
 
+
+// ##### CAPTURE VIRTUAL SERVERS DOCUMENT ROOT #####
+$siteRoot = $_SERVER['DOCUMENT_ROOT'];
 
 // ##### READ MEMBER LIST FROM FILE (IN A BUFFER) #####
 ob_start();		
-$userList = file_get_contents("$siteRoot/the100/cache/memberList.htm");
+$userList = file_get_contents("$siteRoot/members/the100/cache/memberList.htm");
 ob_end_clean();
 
 // ##### PUT MEMBERS IN ARRAY #####
@@ -18,7 +27,6 @@ $unixTime = $delimList[0];
 
 // ##### SET TIME TO US PACIFIC, CONVERT UNIX CACHE TIME TO STANDARD DATE/TIME  #####
 date_default_timezone_set('America/Los_Angeles');
-echo '<b>As of ';
 echo date('Y-m-d H:i', $unixTime);
 echo ' PT</b><br>';
 

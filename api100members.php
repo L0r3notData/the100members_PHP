@@ -1,18 +1,28 @@
 <?php
 
 
+// ##########################################
+// ###                                    ###
+// ###  GROUP MEMBERS FROM THE100.IO API  ###
+// ###  v1.4                              ###
+// ###  @L0r3notData                      ###
+// ###                                    ###
+// ##########################################
+
+
+// ##### CAPTURE VIRTUAL SERVERS DOCUMENT ROOT #####
 $siteRoot = $_SERVER['DOCUMENT_ROOT'];
 
 
 // ##### READ API KEY AND GROUP NUMBER FROM FILE ####
 require 'apiKeys.php';
 
+
 // ##### PRE-SET SOME STRINGS #####
 $pageCnt = 0;
 $continue = 1;
 $cntMembers = 0;
-$memListWeb = '';
-$memListNix = '';
+$memList = '';
 
 
 // ##### BEGIN LOOPING THOUGH ALL MEMBER PAGES #####
@@ -47,35 +57,37 @@ while($continue == '1') {
 	while($x < $cntUser) {
 		$userTag = $getUsers[$x]['gamertag'];
 		$x++;
-		$memListWeb = "$memListWeb $userTag<br>";
+		$memList = "$memList $userTag<br>";
 	}
 
 }
 
 
+// ##### EXPLODE LIST INTO ARRAY, SORT, IMPLODE BACK TO STRING #####
+$memList = explode("<br>", $memList);
+sort($memList, SORT_NATURAL | SORT_FLAG_CASE);
+$finalMembList = implode("<br> ", $memList);
+
+
 // ##### BUILD INFO STRINGS #####
-$titleURL = "<b>https://www.the100.io/groups/$hundGroup</b><br>";
-$titleCount = "<b>Members: $cntMembers</b><br>";
+$titleURL = '<a href="https://www.the100.io/groups/1412">The100</a><br>';
+$titleCount = "Members: $cntMembers<br>";
 
 
 // ##### WRITE MEMBER LIST TO FILE #####
 $theNow = time();
 $theNowTwo = "$theNow<br>";
-$myFile = "$siteRoot/the100/cache/memberList.htm";
+$myFile = "$siteRoot/members/the100/cache/memberList.htm";
 $fh = fopen($myFile, 'w') or die("can't open file");
 fwrite($fh, $theNowTwo);
 fwrite($fh, $titleURL);
 fwrite($fh, $titleCount);
-fwrite($fh, $memListWeb);
+fwrite($fh, $finalMembList);
 fclose($fh);
 
 
 // ##### PRINT TO WEB PAGE BY READING CACHE FILE #####
- require "$siteRoot/the100/cache100members.php";
-
-
-
-
+require "$siteRoot/members/the100/cache100members.php";
 
 
 ?>

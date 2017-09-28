@@ -1,3 +1,12 @@
+// ##########################################
+// ###                                    ###
+// ###  GROUP MEMBERS FROM THE100.IO API  ###
+// ###  v1.4                              ###
+// ###  @L0r3notData                      ###
+// ###                                    ###
+// ##########################################
+
+
 # WHAT IS THIS THING? #
 Set PHP files that reads pages of users from the100.io API for a specified group
 It uses caching to reduce load times (if your 100 group is large, it takes 15+ seconds)
@@ -60,8 +69,18 @@ Added auto creation of cache file if not present
 # CHANGES 1.1 --> 1.2 #
 Added $_SERVER['DOCUMENT_ROOT']; paths for ease of embedding and moving locations
 
-# TARGETED CHANGES 1.1 --> 1.2 #
-Single variable to set cache lifetime
+# CHANGES 1.2 --> 1.3 #
+Added sorting case-insensitive natural ordering to member list
+
+# CHANGES 1.3 --> 1.4 #
+Add single variable to set cache lifetime at top of the100members.php
+Shortened display URL for 100 group link
+
+# TARGETED CHANGES 1.4 --> 1.5 #
 Added always resetting cache dir permissions to writeable
 Added always resetting cache file permissions to writeable
 Possible addition of "please wait" spinner when fetching members from the100.io API
+
+
+
+
